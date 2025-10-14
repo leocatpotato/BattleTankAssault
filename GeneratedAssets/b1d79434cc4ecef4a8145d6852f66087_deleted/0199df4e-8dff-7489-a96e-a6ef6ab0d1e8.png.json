@@ -1,0 +1,20 @@
+{
+    "asset": "b1d79434cc4ecef4a8145d6852f66087",
+    "fileName": "0199df4e-8dff-7489-a96e-a6ef6ab0d1e8.png",
+    "prompt": "現代軍綠迷彩 PBR 材質，有磨損與泥漬，粗糙度中等，金屬度低。",
+    "negativePrompt": "",
+    "model": "94c4260f-b988-40e7-b3d3-435b9f449bd0",
+    "modelName": "Flux.1 Dev",
+    "customSeed": -1,
+    "w3CTraceId": "4e9baf21cd3b6f9c17d73eaf53f8cb90",
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0
+}

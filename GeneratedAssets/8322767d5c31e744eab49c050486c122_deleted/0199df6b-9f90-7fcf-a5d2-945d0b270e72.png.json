@@ -1,0 +1,20 @@
+{
+    "asset": "8322767d5c31e744eab49c050486c122",
+    "fileName": "0199df6b-9f90-7fcf-a5d2-945d0b270e72.png",
+    "prompt": "A tank sprite with a square-shaped body, turret, and cannon, resembling the Leopard 2A7V but in a simplified, non-detailed style.",
+    "negativePrompt": "",
+    "model": "e019af84-3249-4fe3-81bc-a1ba0323fdce",
+    "modelName": "GPT Image 1 - High",
+    "customSeed": -1,
+    "w3CTraceId": "0c5e9795b07bb60231de495f3a4321f3",
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0
+}

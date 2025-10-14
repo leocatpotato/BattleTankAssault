@@ -1,0 +1,20 @@
+{
+    "asset": "b1d79434cc4ecef4a8145d6852f66087",
+    "fileName": "0199df52-1bea-78d9-83ab-ab808ebfc5ef.png",
+    "prompt": "現代軍綠迷彩 PBR 材質，有磨損與泥漬，粗糙度中等，金屬度低",
+    "negativePrompt": "",
+    "model": "e019af84-3249-4fe3-81bc-a1ba0323fdce",
+    "modelName": "GPT Image 1 - High",
+    "customSeed": -1,
+    "w3CTraceId": "f4ac4ef8296ed4145375f3f1fbeeffba",
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0
+}
