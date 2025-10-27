@@ -5,22 +5,22 @@ public class TurretAimMouse : MonoBehaviour
     public Transform tankRoot;
     public LayerMask groundMask;
     public float rotateSpeed = 240f;
-    public float maxPitchUp = 50f;
-    public float maxPitchDown = -10f;
+    public float maxPitchUp = 50f, maxPitchDown = -10f;
     public float aimDistance = 60f;
-    public float minAimRadius = 4.0f;
-    public float aimSmoothing = 0.06f;
-    public float deadZoneDeg = 0.8f;
+    public float minAimRadius = 4f;
+
+    public float holdAngle = 1.2f;
+    public float releaseAngle = 3.0f;
 
     public static Vector3 AimPointWS { get; private set; }
-    Vector3 _vel;
+    Vector3 _aimVel;
+    bool _locked;
 
     void Update()
     {
         if (!tankRoot) return;
 
-        var cam = Camera.main;
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(VirtualCursor.ScreenPos);
         Vector3 rawPoint;
         if (Physics.Raycast(ray, out var hit, 5000f, groundMask))
         {
@@ -37,30 +37,36 @@ public class TurretAimMouse : MonoBehaviour
             rawPoint = tankRoot.position + clampedDir.normalized * aimDistance;
         }
 
-        Vector3 v = rawPoint - tankRoot.position;
-        Vector3 flat = new Vector3(v.x, 0, v.z);
-        if (flat.sqrMagnitude < minAimRadius * minAimRadius && flat.sqrMagnitude > 1e-6f)
-        {
-            flat = flat.normalized * minAimRadius;
-            rawPoint = tankRoot.position + flat;
-        }
-
+        Vector3 flat = rawPoint - tankRoot.position; flat.y = 0f;
+        if (flat.sqrMagnitude > 1e-6f && flat.magnitude < minAimRadius)
+            rawPoint = tankRoot.position + flat.normalized * minAimRadius;
 
         AimPointWS = Vector3.SmoothDamp(AimPointWS == default ? rawPoint : AimPointWS,
-                                        rawPoint, ref _vel, aimSmoothing);
-
+                                        rawPoint, ref _aimVel, 0.06f);
 
         Vector3 local = tankRoot.InverseTransformPoint(AimPointWS); local.y = 0f;
         if (local.sqrMagnitude < 1e-6f) return;
 
         float targetYaw = Mathf.Atan2(local.x, local.z) * Mathf.Rad2Deg;
         float curYaw = transform.localEulerAngles.y; if (curYaw > 180) curYaw -= 360;
-        float delta = Mathf.DeltaAngle(curYaw, targetYaw);
-        if (Mathf.Abs(delta) < deadZoneDeg) return;
+        float err = Mathf.DeltaAngle(curYaw, targetYaw);
 
-        Quaternion targetLocal = Quaternion.Euler(0f, targetYaw, 0f);
+        if (_locked)
+        {
+            if (Mathf.Abs(err) >= releaseAngle) _locked = false;
+            else { transform.localRotation = Quaternion.Euler(0f, targetYaw, 0f); return; }
+        }
+        else if (Mathf.Abs(err) <= holdAngle)
+        {
+            _locked = true;
+            transform.localRotation = Quaternion.Euler(0f, targetYaw, 0f);
+            return;
+        }
+
         transform.localRotation = Quaternion.RotateTowards(
-            transform.localRotation, targetLocal, rotateSpeed * Time.deltaTime
+            transform.localRotation,
+            Quaternion.Euler(0f, targetYaw, 0f),
+            rotateSpeed * Time.deltaTime
         );
     }
 }
