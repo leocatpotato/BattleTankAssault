@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4174767394137983464
+--- !u!1001 &364399071784668811
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -41,7 +41,7 @@ PrefabInstance:
     - target: {fileID: 5445433389576580680, guid: 324e70501a9ce4544b113846dce5e7a0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 36.41174
       objectReference: {fileID: 0}
     - target: {fileID: 5445433389576580680, guid: 324e70501a9ce4544b113846dce5e7a0,
         type: 3}
@@ -51,7 +51,7 @@ PrefabInstance:
     - target: {fileID: 5445433389576580680, guid: 324e70501a9ce4544b113846dce5e7a0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -118.55457
       objectReference: {fileID: 0}
     - target: {fileID: 5445433389576580680, guid: 324e70501a9ce4544b113846dce5e7a0,
         type: 3}
@@ -101,7 +101,7 @@ PrefabInstance:
     - target: {fileID: 8626734310341861991, guid: 324e70501a9ce4544b113846dce5e7a0,
         type: 3}
       propertyPath: m_Name
-      value: Tank_Enemy
+      value: Tank_Enemy 1
       objectReference: {fileID: 0}
     - target: {fileID: 8626734310341861991, guid: 324e70501a9ce4544b113846dce5e7a0,
         type: 3}
@@ -128,37 +128,31 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8626734310341861991, guid: 324e70501a9ce4544b113846dce5e7a0,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: -2234056807130411091}
+      addedObject: {fileID: 151904108217157078}
     - targetCorrespondingSourceObject: {fileID: 8626734310341861991, guid: 324e70501a9ce4544b113846dce5e7a0,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 166319963854719751}
+      addedObject: {fileID: 4489591695116118718}
   m_SourcePrefab: {fileID: 100100000, guid: 324e70501a9ce4544b113846dce5e7a0, type: 3}
---- !u!4 &226270806429904017 stripped
+--- !u!4 &4594441057219177458 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4236797405618627961, guid: 324e70501a9ce4544b113846dce5e7a0,
     type: 3}
-  m_PrefabInstance: {fileID: 4174767394137983464}
+  m_PrefabInstance: {fileID: 364399071784668811}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &5370488383613880635 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8315912553604612307, guid: 324e70501a9ce4544b113846dce5e7a0,
-    type: 3}
-  m_PrefabInstance: {fileID: 4174767394137983464}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5645141141010754447 stripped
+--- !u!1 &8266016406847155436 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8626734310341861991, guid: 324e70501a9ce4544b113846dce5e7a0,
     type: 3}
-  m_PrefabInstance: {fileID: 4174767394137983464}
+  m_PrefabInstance: {fileID: 364399071784668811}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-2234056807130411091
+--- !u!114 &151904108217157078
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5645141141010754447}
+  m_GameObject: {fileID: 8266016406847155436}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a1fa69731e3a15943a7f7bb22f03de0c, type: 3}
@@ -170,26 +164,46 @@ MonoBehaviour:
   losMask:
     serializedVersion: 2
     m_Bits: 393216
-  eye: {fileID: 226270806429904017}
---- !u!114 &166319963854719751
+  eye: {fileID: 4594441057219177458}
+--- !u!114 &4489591695116118718
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5645141141010754447}
+  m_GameObject: {fileID: 8266016406847155436}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c139735777d3edf4e87529fd43205c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TankEnemyAI
-  sensor: {fileID: 0}
-  turret: {fileID: 226270806429904017}
-  muzzle: {fileID: 5370488383613880635}
+  turret: {fileID: 4594441057219177458}
+  muzzle: {fileID: 8531670843827523160}
   bulletPrefab: {fileID: 745484274984767949, guid: ca23911c92af35342aae6d360ea65b51,
     type: 3}
-  moveSpeed: 6
+  waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  waypointGroup: {fileID: 0}
+  loop: 1
+  waypointStopDist: 1.2
+  pauseAtWaypoint: 0.8
+  patrolSpeed: 4
+  chaseSpeed: 6
   rotateSpeed: 70
   keepDistance: 18
-  fireInterval: 2.2
   fireRange: 50
+  fireInterval: 2.2
+  turretYawSpeed: 160
+  lookAroundTime: 3.5
+  returnSpeed: 5
+--- !u!4 &8531670843827523160 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8315912553604612307, guid: 324e70501a9ce4544b113846dce5e7a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 364399071784668811}
+  m_PrefabAsset: {fileID: 0}
