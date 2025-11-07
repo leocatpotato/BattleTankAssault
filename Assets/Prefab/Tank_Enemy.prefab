@@ -13,6 +13,16 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 4ee45e3637247024ab1d4c2aa525822e, type: 2}
+    - target: {fileID: 1958043559739880159, guid: 324e70501a9ce4544b113846dce5e7a0,
+        type: 3}
+      propertyPath: cur
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1958043559739880159, guid: 324e70501a9ce4544b113846dce5e7a0,
+        type: 3}
+      propertyPath: max
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2139577690345644237, guid: 324e70501a9ce4544b113846dce5e7a0,
         type: 3}
       propertyPath: m_Layer
@@ -98,10 +108,15 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 4ee45e3637247024ab1d4c2aa525822e, type: 2}
+    - target: {fileID: 8315912553604612307, guid: 324e70501a9ce4544b113846dce5e7a0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8626734310341861991, guid: 324e70501a9ce4544b113846dce5e7a0,
         type: 3}
       propertyPath: m_Name
-      value: Tank_Enemy 1
+      value: Tank_Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8626734310341861991, guid: 324e70501a9ce4544b113846dce5e7a0,
         type: 3}
