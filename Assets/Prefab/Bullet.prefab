@@ -125,10 +125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e444d74663c3b40bf0358c0ce9171f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shell
-  life: 3
+  life: 10
   damage: 40
   blastRadius: 3.5
-  blastForce: 900
 --- !u!54 &2513879082731237793
 Rigidbody:
   m_ObjectHideFlags: 0
