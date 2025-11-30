@@ -44,19 +44,39 @@ public class EnemySpawner : MonoBehaviour
     void BindPath(GameObject enemy, int spIndex)
     {
         var ai = enemy.GetComponent<TankEnemyAI>();
-        if (ai == null) return;
+        if (ai == null)
+            return;
 
-        if (waypointGroup == null) { ai.SetWaypoints(null); return; }
+        if (waypointGroup == null)
+        {
+            ai.SetWaypoints(null);
+            return;
+        }
 
-        int n = waypointGroup.childCount;
-        if (n < 6) { ai.SetWaypoints(null); return; }
+        int total = waypointGroup.childCount;
+        if (total == 0)
+        {
+            ai.SetWaypoints(null);
+            return;
+        }
 
-        Transform[] pathA = new Transform[3] { waypointGroup.GetChild(0), waypointGroup.GetChild(1), waypointGroup.GetChild(2) };
-        Transform[] pathB = new Transform[3] { waypointGroup.GetChild(3), waypointGroup.GetChild(4), waypointGroup.GetChild(5) };
+        int half = Mathf.Max(1, total / 2);
 
-        if (spIndex == 0) ai.SetWaypoints(pathA);
-        else if (spIndex == 1) ai.SetWaypoints(pathB);
-        else ai.SetWaypoints((spIndex % 2 == 0) ? pathA : pathB);
+        int startIndex = (spIndex == 0) ? 0 : half;
+        int endIndex = (spIndex == 0) ? half : total;
+
+        startIndex = Mathf.Clamp(startIndex, 0, total - 1);
+        endIndex = Mathf.Clamp(endIndex, startIndex + 1, total);
+
+        int len = endIndex - startIndex;
+        Transform[] path = new Transform[len];
+
+        for (int i = 0; i < len; i++)
+        {
+            path[i] = waypointGroup.GetChild(startIndex + i);
+        }
+
+        ai.SetWaypoints(path);
     }
 
     void CleanupDead()

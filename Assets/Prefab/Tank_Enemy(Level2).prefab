@@ -22,12 +22,12 @@ PrefabInstance:
     - target: {fileID: 1958043559739880159, guid: 324e70501a9ce4544b113846dce5e7a0,
         type: 3}
       propertyPath: Cur
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 1958043559739880159, guid: 324e70501a9ce4544b113846dce5e7a0,
         type: 3}
       propertyPath: Max
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 1958043559739880159, guid: 324e70501a9ce4544b113846dce5e7a0,
         type: 3}
@@ -142,7 +142,7 @@ PrefabInstance:
     - target: {fileID: 8626734310341861991, guid: 324e70501a9ce4544b113846dce5e7a0,
         type: 3}
       propertyPath: m_Name
-      value: Tank_Enemy
+      value: Tank_Enemy(Level2)
       objectReference: {fileID: 0}
     - target: {fileID: 8626734310341861991, guid: 324e70501a9ce4544b113846dce5e7a0,
         type: 3}
@@ -243,8 +243,8 @@ MonoBehaviour:
   chaseSpeed: 6
   rotateSpeed: 70
   keepDistance: 18
-  fireRange: 25
-  fireInterval: 7
+  fireRange: 27
+  fireInterval: 6
   turretYawSpeed: 120
   lookAroundTime: 3.5
   returnSpeed: 5
