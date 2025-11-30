@@ -70,13 +70,13 @@ public class LevelGameManager : MonoBehaviour
     private void UpdateUI()
     {
         if (hpText != null && playerHealth != null)
-            hpText.text = $"{playerHealth.Cur}/{playerHealth.Max}";
+            hpText.text = $"Health:{playerHealth.Cur}/{playerHealth.Max}";
 
         if (enemyCountText != null)
-            enemyCountText.text = $"{enemiesKilled}/{totalEnemiesInLevel}";
+            enemyCountText.text = $"Enemy:{enemiesKilled}/{totalEnemiesInLevel}";
 
         if (scoreText != null)
-            scoreText.text = score.ToString();
+            scoreText.text = $"Score:{score.ToString()}";
     }
 
     private void OnPlayerHealthChanged(Health h)
