@@ -138,7 +138,7 @@ Transform:
   m_GameObject: {fileID: 3993633781466804109}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0.7}
+  m_LocalPosition: {x: -0, y: 0.4, z: 1.159}
   m_LocalScale: {x: 2, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -511,6 +511,8 @@ GameObject:
   - component: {fileID: 1958043559739880159}
   - component: {fileID: 6910507696700653652}
   - component: {fileID: 456671340352731573}
+  - component: {fileID: -4053297363012696281}
+  - component: {fileID: 6116245139421682982}
   m_Layer: 19
   m_Name: Tank_Player
   m_TagString: Player
@@ -611,8 +613,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88529ff3feef82d42b3406023adebb82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  Max: 400
-  Cur: 400
+  Max: 500
+  Cur: 500
+  IsEnemy: 0
 --- !u!114 &6910507696700653652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -656,6 +659,35 @@ MonoBehaviour:
   fireCD: 0.25
   muzzleSpeed: 60
   fireAudio: {fileID: 0}
+--- !u!114 &-4053297363012696281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8626734310341861991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16c1f0bed00b0f84aaaade77a559fb04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExplosionOnDeath
+  explosionPrefab: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b,
+    type: 3}
+  explosionLifetime: 3
+--- !u!114 &6116245139421682982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8626734310341861991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16c1f0bed00b0f84aaaade77a559fb04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExplosionOnDeath
+  explosionPrefab: {fileID: 0}
+  explosionLifetime: 3
 --- !u!1 &8908949178805992851
 GameObject:
   m_ObjectHideFlags: 0

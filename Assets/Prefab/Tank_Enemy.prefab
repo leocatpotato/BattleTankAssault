@@ -168,6 +168,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4489591695116118718}
+    - targetCorrespondingSourceObject: {fileID: 8626734310341861991, guid: 324e70501a9ce4544b113846dce5e7a0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6161313835243583605}
   m_SourcePrefab: {fileID: 100100000, guid: 324e70501a9ce4544b113846dce5e7a0, type: 3}
 --- !u!4 &4594441057219177458 stripped
 Transform:
@@ -236,6 +240,22 @@ MonoBehaviour:
   turretYawSpeed: 120
   lookAroundTime: 3.5
   returnSpeed: 5
+--- !u!114 &-6161313835243583605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8266016406847155436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16c1f0bed00b0f84aaaade77a559fb04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExplosionOnDeath
+  explosionPrefab: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b,
+    type: 3}
+  explosionAudio: {fileID: 8300000, guid: acda60131966cce4da5538d11a86875f, type: 3}
+  destroyDelay: 2
 --- !u!4 &8531670843827523160 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8315912553604612307, guid: 324e70501a9ce4544b113846dce5e7a0,
