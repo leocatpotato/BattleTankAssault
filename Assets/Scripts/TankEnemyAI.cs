@@ -66,6 +66,7 @@ public class TankEnemyAI : MonoBehaviour
     {
         if ((waypoints == null || waypoints.Length == 0) && waypointGroup)
             AutoBindWaypoints();
+
         if (waypoints != null && waypoints.Length > 0)
             wpIndex = FindNearestWP();
     }
@@ -263,9 +264,20 @@ public class TankEnemyAI : MonoBehaviour
         if (Time.time < nextFire) return;
 
         nextFire = Time.time + fireInterval;
+
         var go = Instantiate(bulletPrefab, muzzle.position, muzzle.rotation);
+
         var rbB = go.GetComponent<Rigidbody>();
-        if (rbB) rbB.linearVelocity = muzzle.forward * 60f;
+        if (rbB)
+        {
+            rbB.linearVelocity = muzzle.forward * 60f;
+        }
+
+        var shell = go.GetComponent<Shell>();
+        if (shell != null)
+        {
+            shell.Init(true, transform.root);
+        }
     }
 
     int FindNearestWP()

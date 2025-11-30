@@ -29,11 +29,21 @@ public class Shooter : MonoBehaviour
         {
             nextFire = Time.time + fireCD;
 
-            GameObject shell = Instantiate(shellPrefab, muzzle.position, muzzle.rotation);
-            Rigidbody rb = shell.GetComponent<Rigidbody>();
-            if (rb) rb.linearVelocity = muzzle.forward * muzzleSpeed;
+            GameObject shellObj = Instantiate(shellPrefab, muzzle.position, muzzle.rotation);
 
-            if (fireAudio)
+            Rigidbody rb = shellObj.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.linearVelocity = muzzle.forward * muzzleSpeed;
+            }
+
+            Shell shell = shellObj.GetComponent<Shell>();
+            if (shell != null)
+            {
+                shell.Init(false, transform.root);
+            }
+
+            if (fireAudio && fireAudio.clip != null)
             {
                 fireAudio.PlayOneShot(fireAudio.clip);
             }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -7759259414601354458}
   - component: {fileID: 2513879082731237793}
   m_Layer: 21
-  m_Name: Bullet
+  m_Name: Bullet(Player)
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,7 +107,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -125,9 +125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e444d74663c3b40bf0358c0ce9171f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shell
-  life: 10
   damage: 40
-  blastRadius: 3.5
+  lifeTime: 10
+  isEnemyBullet: 0
 --- !u!54 &2513879082731237793
 Rigidbody:
   m_ObjectHideFlags: 0

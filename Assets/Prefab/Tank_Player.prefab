@@ -611,8 +611,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88529ff3feef82d42b3406023adebb82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  max: 200
-  cur: 200
+  Max: 400
+  Cur: 400
 --- !u!114 &6910507696700653652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -655,6 +655,7 @@ MonoBehaviour:
     type: 3}
   fireCD: 0.25
   muzzleSpeed: 60
+  fireAudio: {fileID: 0}
 --- !u!1 &8908949178805992851
 GameObject:
   m_ObjectHideFlags: 0

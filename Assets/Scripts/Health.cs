@@ -1,6 +1,58 @@
+using System;
 using UnityEngine;
+
 public class Health : MonoBehaviour
 {
-    public float max = 100, cur = 100; public System.Action onDead;
-    public void Apply(float dmg) { cur -= dmg; if (cur <= 0) { onDead?.Invoke(); Destroy(gameObject); } }
+    public int Max = 100;
+    public int Cur = 100;
+    public bool IsEnemy;
+
+    public event Action<Health> onHealthChanged;
+    public event Action<Health> onDied;
+
+    private bool _isDead;
+
+    private void Awake()
+    {
+        Cur = Mathf.Clamp(Cur, 0, Max);
+    }
+
+    public void TakeDamage(int amount, bool isEnemyBullet)
+    {
+        if (_isDead) return;
+        if (amount <= 0) return;
+
+        if (IsEnemy && isEnemyBullet == true) return;
+        if (!IsEnemy && isEnemyBullet == false) return;
+
+        Cur = Mathf.Max(Cur - amount, 0);
+        onHealthChanged?.Invoke(this);
+
+        if (Cur <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        if (_isDead) return;
+        _isDead = true;
+
+        onDied?.Invoke(this);
+
+        if (LevelGameManager.Instance != null)
+        {
+            if (IsEnemy)
+            {
+                LevelGameManager.Instance.OnEnemyKilled(this);
+            }
+            else
+            {
+                LevelGameManager.Instance.OnPlayerDied(this);
+            }
+        }
+
+        Destroy(gameObject);
+    }
 }

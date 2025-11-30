@@ -2,24 +2,41 @@ using UnityEngine;
 
 public class Shell : MonoBehaviour
 {
-    public float life = 10f;
-    public float damage = 40f;
-    public float blastRadius = 3.5f;
+    [Header("Damage")]
+    [SerializeField] private int damage = 40;
 
-    void Start()
+    [Header("Lifetime")]
+    [SerializeField] private float lifeTime = 10f;
+
+    [Header("Side")]
+    [SerializeField] private bool isEnemyBullet = false;
+
+    private Transform ownerRoot;
+
+    public void Init(bool isEnemyBullet, Transform ownerRoot)
     {
-        Destroy(gameObject, life);
+        this.isEnemyBullet = isEnemyBullet;
+        this.ownerRoot = ownerRoot;
     }
 
-    void OnCollisionEnter(Collision c)
+    private void OnEnable()
     {
-        foreach (var col in Physics.OverlapSphere(transform.position, blastRadius))
-        {
-            if (col.TryGetComponent<Health>(out var h))
-            {
-                h.Apply(damage);
-            }
-        }
+        Destroy(gameObject, lifeTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (ownerRoot != null && other.transform.root == ownerRoot)
+            return;
+
+        Health targetHealth = other.GetComponent<Health>();
+        if (targetHealth == null)
+            targetHealth = other.GetComponentInParent<Health>();
+
+        if (targetHealth == null)
+            return;
+
+        targetHealth.TakeDamage(damage, isEnemyBullet);
 
         Destroy(gameObject);
     }
