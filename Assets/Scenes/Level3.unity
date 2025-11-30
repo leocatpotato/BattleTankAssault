@@ -252,6 +252,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: house_ruined Variant (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7139610521025655761, guid: 48c9c8e49e7b8c648937ba50992d20ee,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139610521025667763, guid: 48c9c8e49e7b8c648937ba50992d20ee,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139610521025857825, guid: 48c9c8e49e7b8c648937ba50992d20ee,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 7139610521025944765, guid: 48c9c8e49e7b8c648937ba50992d20ee,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -325,6 +340,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: house_ruined Variant (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139610521025655761, guid: 48c9c8e49e7b8c648937ba50992d20ee,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139610521025667763, guid: 48c9c8e49e7b8c648937ba50992d20ee,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139610521025857825, guid: 48c9c8e49e7b8c648937ba50992d20ee,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 7139610521025944765, guid: 48c9c8e49e7b8c648937ba50992d20ee,
         type: 3}
@@ -3212,6 +3242,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: house_ruined Variant (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139610521025655761, guid: 48c9c8e49e7b8c648937ba50992d20ee,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139610521025667763, guid: 48c9c8e49e7b8c648937ba50992d20ee,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139610521025857825, guid: 48c9c8e49e7b8c648937ba50992d20ee,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 7139610521025944765, guid: 48c9c8e49e7b8c648937ba50992d20ee,
         type: 3}
@@ -6509,6 +6554,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: house_ruined Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139610521025655761, guid: 48c9c8e49e7b8c648937ba50992d20ee,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139610521025667763, guid: 48c9c8e49e7b8c648937ba50992d20ee,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139610521025857825, guid: 48c9c8e49e7b8c648937ba50992d20ee,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 7139610521025944765, guid: 48c9c8e49e7b8c648937ba50992d20ee,
         type: 3}

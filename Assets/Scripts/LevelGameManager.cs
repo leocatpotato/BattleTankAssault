@@ -199,6 +199,9 @@ public class LevelGameManager : MonoBehaviour
         if (pausePanel != null) pausePanel.SetActive(true);
         if (optionsPanel != null) optionsPanel.SetActive(false);
 
+        if (BGMManager.Instance != null)
+            BGMManager.Instance.SetPaused(true);
+
         UnlockCursor();
     }
 
@@ -209,6 +212,9 @@ public class LevelGameManager : MonoBehaviour
 
         if (pausePanel != null) pausePanel.SetActive(false);
         if (optionsPanel != null) optionsPanel.SetActive(false);
+
+        if (BGMManager.Instance != null)
+            BGMManager.Instance.SetPaused(false);
 
         LockCursor();
     }
