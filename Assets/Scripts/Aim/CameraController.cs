@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
     {
         if (!target) return;
 
-        Vector3 aimPos = AimingController_Kawaii_FindAim();
+        Vector3 aimPos = AimingController_FindAim();
         Vector3 dir = (aimPos - target.position);
         dir.y = 0;
         if (dir.sqrMagnitude < 0.1f) dir = target.forward;
@@ -36,7 +36,7 @@ public class CameraController : MonoBehaviour
             lerpSpeed * Time.deltaTime);
     }
 
-    Vector3 AimingController_Kawaii_FindAim()
+    Vector3 AimingController_FindAim()
     {
         var aim = AimingController_Find();
         if (aim != null) return aim.transform.position + aim.transform.forward * 40f;

@@ -13,6 +13,12 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 4ee45e3637247024ab1d4c2aa525822e, type: 2}
+    - target: {fileID: 1771483853034522274, guid: 324e70501a9ce4544b113846dce5e7a0,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: e0b2469e646a4694d97223e347a2beae,
+        type: 2}
     - target: {fileID: 1958043559739880159, guid: 324e70501a9ce4544b113846dce5e7a0,
         type: 3}
       propertyPath: Cur

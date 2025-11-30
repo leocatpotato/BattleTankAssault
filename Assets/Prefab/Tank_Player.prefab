@@ -153,11 +153,12 @@ AudioSource:
   m_GameObject: {fileID: 3993633781466804109}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: e0b2469e646a4694d97223e347a2beae,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 587c8f4f3a4adf74188a13dd0b8fd416, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.7
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -512,7 +513,6 @@ GameObject:
   - component: {fileID: 6910507696700653652}
   - component: {fileID: 456671340352731573}
   - component: {fileID: -4053297363012696281}
-  - component: {fileID: 6116245139421682982}
   m_Layer: 19
   m_Name: Tank_Player
   m_TagString: Player
@@ -673,21 +673,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExplosionOnDeath
   explosionPrefab: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b,
     type: 3}
-  explosionLifetime: 3
---- !u!114 &6116245139421682982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8626734310341861991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16c1f0bed00b0f84aaaade77a559fb04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ExplosionOnDeath
-  explosionPrefab: {fileID: 0}
-  explosionLifetime: 3
+  explosionAudio: {fileID: 0}
+  destroyDelay: 2
 --- !u!1 &8908949178805992851
 GameObject:
   m_ObjectHideFlags: 0
