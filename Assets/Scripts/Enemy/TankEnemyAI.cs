@@ -15,6 +15,11 @@ public class TankEnemyAI : MonoBehaviour
     public float waypointStopDist = 1.2f;
     public float pauseAtWaypoint = 0.8f;
 
+    [Header("Waypoint Randomness")]
+    public bool randomizePauseAtWaypoint = true;
+    public float pauseRandomMinFactor = 0.7f;
+    public float pauseRandomMaxFactor = 1.3f;
+
     [Header("Movement")]
     public float patrolSpeed = 4f;
     public float chaseSpeed = 6f;
@@ -36,19 +41,36 @@ public class TankEnemyAI : MonoBehaviour
     public float avoidWeight = 0.7f;
     public float sideAngle = 45f;
 
+    [Header("Flocking")]
+    public bool enableFlocking = true;
+    public float flockNeighbourRadius = 10f;
+    public float flockSeparationRadius = 4f;
+    public float flockSeparationWeight = 0.8f;
+
+    [Header("Tactics / Randomness")]
+    public float damagedFleeChance = 0.3f;
+    public bool circleClockwise = true;
+
     EnemySensor sensor;
     Rigidbody rb;
 
     enum State { Patrol, Chase, Combat, LookAround, Return }
     State state = State.Patrol;
 
+    enum CombatTactic { Normal, Circle, Flee }
+    CombatTactic combatTactic = CombatTactic.Normal;
+
     int wpIndex = 0;
     float pauseTimer = 0f;
+    float currentPauseTarget = 0f;
     float nextFire = 0f;
 
     Vector3 lastSeenPos;
     float lookTimer = 0f;
     float lookYaw = 0f;
+
+    bool hasBeenDamaged = false;
+    bool hasTacticChosen = false;
 
     public void SetWaypointGroup(Transform group)
     {
@@ -75,11 +97,20 @@ public class TankEnemyAI : MonoBehaviour
 
         if (waypoints != null && waypoints.Length > 0)
             wpIndex = FindNearestWP();
+
+        RecomputePauseTime();
+        hasTacticChosen = false;
     }
 
     void OnValidate()
     {
         if (waypointGroup) AutoBindWaypoints();
+    }
+
+    public void NotifyDamaged()
+    {
+        hasBeenDamaged = true;
+        hasTacticChosen = false;
     }
 
     void Update()
@@ -150,6 +181,15 @@ public class TankEnemyAI : MonoBehaviour
         wpIndex = FindNearestWP();
     }
 
+    void RecomputePauseTime()
+    {
+        currentPauseTarget = pauseAtWaypoint;
+        if (randomizePauseAtWaypoint)
+        {
+            float factor = Random.Range(pauseRandomMinFactor, pauseRandomMaxFactor);
+            currentPauseTarget = Mathf.Max(0.05f, pauseAtWaypoint * factor);
+        }
+    }
 
     void DoPatrol()
     {
@@ -164,10 +204,11 @@ public class TankEnemyAI : MonoBehaviour
         if (ArrivedXZ(transform.position, wp, waypointStopDist))
         {
             pauseTimer += Time.fixedDeltaTime;
-            if (pauseTimer >= pauseAtWaypoint)
+            if (pauseTimer >= currentPauseTarget)
             {
                 pauseTimer = 0f;
                 wpIndex = NextWP(wpIndex);
+                RecomputePauseTime();
             }
 
             FaceTowards(wp, rotateSpeed);
@@ -203,15 +244,60 @@ public class TankEnemyAI : MonoBehaviour
         Vector3 tp = tgt.position;
         float d = DistXZ(transform.position, tp);
 
+        if (hasBeenDamaged && !hasTacticChosen)
+        {
+            float roll = Random.value;
+            combatTactic = (roll < damagedFleeChance) ? CombatTactic.Flee : CombatTactic.Circle;
+            hasTacticChosen = true;
+        }
+
+        switch (combatTactic)
+        {
+            case CombatTactic.Flee:
+                CombatFlee(tp, d);
+                break;
+            case CombatTactic.Circle:
+                CombatCircle(tp, d);
+                break;
+            default:
+                CombatNormal(tp, d);
+                break;
+        }
+
+        AimTurretAt(tp);
+        TryFire(tp, d);
+    }
+
+    void CombatNormal(Vector3 tp, float d)
+    {
         if (d > keepDistance + 0.8f)
             MoveTowards(tp, chaseSpeed * 0.6f, rotateSpeed);
         else if (d < keepDistance - 0.8f)
             MoveTowardsBack(tp, chaseSpeed * 0.4f, rotateSpeed);
         else
             FaceTowards(tp, rotateSpeed);
+    }
 
-        AimTurretAt(tp);
-        TryFire(tp, d);
+    void CombatFlee(Vector3 tp, float d)
+    {
+        if (d < keepDistance + 10f)
+            MoveTowardsBack(tp, chaseSpeed, rotateSpeed);
+        else
+            FaceTowards(tp, rotateSpeed);
+    }
+
+    void CombatCircle(Vector3 tp, float d)
+    {
+        Vector3 toTarget = tp - transform.position;
+        toTarget.y = 0f;
+        if (toTarget.sqrMagnitude < 1e-4f) return;
+
+        Vector3 radial = -toTarget.normalized;
+        Vector3 tangent = Vector3.Cross(Vector3.up, toTarget).normalized;
+        if (!circleClockwise) tangent = -tangent;
+
+        Vector3 dir = (tangent * 0.8f + radial * 0.2f).normalized;
+        MoveDirection(dir, chaseSpeed * 0.7f, rotateSpeed);
     }
 
     void DoLookAround()
@@ -239,7 +325,6 @@ public class TankEnemyAI : MonoBehaviour
         AimTurretForward();
     }
 
-
     void MoveTowards(Vector3 world, float speed, float rotSpd)
     {
         Vector3 to = world - transform.position;
@@ -247,8 +332,8 @@ public class TankEnemyAI : MonoBehaviour
         if (to.sqrMagnitude < 1e-4f) return;
 
         Vector3 dir = to.normalized;
-
         dir = AvoidObstacles(dir);
+        dir = ApplyFlocking(dir);
 
         Quaternion look = Quaternion.LookRotation(dir, Vector3.up);
         rb.MoveRotation(Quaternion.RotateTowards(rb.rotation, look, rotSpd * Time.fixedDeltaTime));
@@ -263,8 +348,21 @@ public class TankEnemyAI : MonoBehaviour
 
         Vector3 dir = -to.normalized;
         dir = AvoidObstacles(dir);
+        dir = ApplyFlocking(dir);
 
         Quaternion look = Quaternion.LookRotation(-dir, Vector3.up);
+        rb.MoveRotation(Quaternion.RotateTowards(rb.rotation, look, rotSpd * Time.fixedDeltaTime));
+        rb.MovePosition(rb.position + dir * (speed * Time.fixedDeltaTime));
+    }
+
+    void MoveDirection(Vector3 dir, float speed, float rotSpd)
+    {
+        if (dir.sqrMagnitude < 1e-4f) return;
+        dir = dir.normalized;
+        dir = AvoidObstacles(dir);
+        dir = ApplyFlocking(dir);
+
+        Quaternion look = Quaternion.LookRotation(dir, Vector3.up);
         rb.MoveRotation(Quaternion.RotateTowards(rb.rotation, look, rotSpd * Time.fixedDeltaTime));
         rb.MovePosition(rb.position + dir * (speed * Time.fixedDeltaTime));
     }
@@ -277,6 +375,7 @@ public class TankEnemyAI : MonoBehaviour
 
         Vector3 dir = to.normalized;
         dir = AvoidObstacles(dir);
+        dir = ApplyFlocking(dir);
 
         Quaternion look = Quaternion.LookRotation(dir, Vector3.up);
         rb.MoveRotation(Quaternion.RotateTowards(rb.rotation, look, rotSpd * Time.fixedDeltaTime));
@@ -316,7 +415,6 @@ public class TankEnemyAI : MonoBehaviour
             turret.localRotation, localForward, turretYawSpeed * Time.deltaTime);
     }
 
-
     void TryFire(Vector3 tp, float dist)
     {
         if (!muzzle || !bulletPrefab) return;
@@ -325,7 +423,7 @@ public class TankEnemyAI : MonoBehaviour
 
         nextFire = Time.time + fireInterval;
 
-        var go = Instantiate(bulletPrefab, muzzle.position, muzzle.rotation);
+        GameObject go = Instantiate(bulletPrefab, muzzle.position, muzzle.rotation);
 
         var rbB = go.GetComponent<Rigidbody>();
         if (rbB)
@@ -340,7 +438,6 @@ public class TankEnemyAI : MonoBehaviour
         }
     }
 
-
     Vector3 AvoidObstacles(Vector3 desiredDir)
     {
         if (obstacleMask == 0 || avoidDistance <= 0f)
@@ -350,7 +447,6 @@ public class TankEnemyAI : MonoBehaviour
         Vector3 dir = desiredDir.normalized;
 
         RaycastHit hit;
-
         bool hitCenter = Physics.Raycast(origin, dir, out hit, avoidDistance, obstacleMask);
 
         if (!hitCenter)
@@ -373,6 +469,44 @@ public class TankEnemyAI : MonoBehaviour
         return Vector3.Lerp(dir, steerDir, avoidWeight).normalized;
     }
 
+    Vector3 ApplyFlocking(Vector3 desiredDir)
+    {
+        if (!enableFlocking) return desiredDir;
+
+        Collider[] neighbours = Physics.OverlapSphere(transform.position, flockNeighbourRadius);
+        if (neighbours == null || neighbours.Length == 0) return desiredDir;
+
+        Vector3 separation = Vector3.zero;
+        int count = 0;
+
+        foreach (var col in neighbours)
+        {
+            if (!col || col.transform == transform) continue;
+            if (!col.CompareTag(gameObject.tag)) continue;
+
+            Vector3 toMe = transform.position - col.transform.position;
+            toMe.y = 0f;
+            float sqrDist = toMe.sqrMagnitude;
+            if (sqrDist < 1e-4f) continue;
+
+            float dist = Mathf.Sqrt(sqrDist);
+            if (dist <= flockSeparationRadius)
+            {
+                separation += toMe.normalized / Mathf.Max(dist, 0.01f);
+                count++;
+            }
+        }
+
+        if (count > 0)
+        {
+            separation /= count;
+            Vector3 combined = desiredDir + separation * flockSeparationWeight;
+            if (combined.sqrMagnitude > 1e-4f)
+                return combined.normalized;
+        }
+
+        return desiredDir;
+    }
 
     int FindNearestWP()
     {

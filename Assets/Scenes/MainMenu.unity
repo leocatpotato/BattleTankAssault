@@ -2742,7 +2742,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 40}
   m_SizeDelta: {x: 1000, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1503412707
@@ -2765,34 +2765,34 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'It''s a simple tank battle game.
+  m_text: 'Take down each enemy +50 score; clear a level without being damaged +500
+    bonus score.
 
-    Take down each enemy +50 score;
-    clear a level without being damaged +500 bonus score.
+    From Level 1 to 3 there will be more numbers of enemy, enemy
+    has faster fire rate and shooting range etc.
 
-    From Level 1 to Level
-    3 there will be more enemies. Enemies will have more health, fire rate, and fire
-    distance.
 
-    
+    There is a white box moving
+    around(for now) is a repaire fairy which collect it can heal you.
+
+
 
     [Keyboard]
 
-    WASD to move
+    WASD
+    to move
 
-    ESC to pause (open
-    pause panel)
+    ESC to pause (open pause panel)
 
-    
 
     [Mouse]
 
     Cursor to aim
 
-    Left click to shoot
+    Left
+    click to shoot
 
-    Mouse
-    wheel to change view (close or far)
+    Mouse wheel to change view (close or far)
 
 '
   m_isRightToLeft: 0
@@ -2821,8 +2821,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

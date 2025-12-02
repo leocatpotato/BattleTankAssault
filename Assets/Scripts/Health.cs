@@ -28,11 +28,35 @@ public class Health : MonoBehaviour
         Cur = Mathf.Max(Cur - amount, 0);
         onHealthChanged?.Invoke(this);
 
+        if (IsEnemy && !isEnemyBullet)
+        {
+            var ai = GetComponent<TankEnemyAI>();
+            if (ai != null)
+            {
+                ai.NotifyDamaged();
+            }
+        }
+
         if (Cur <= 0)
         {
             Die();
         }
     }
+
+    public void Heal(int amount)
+    {
+        if (_isDead) return;
+        if (amount <= 0) return;
+
+        int old = Cur;
+        Cur = Mathf.Min(Cur + amount, Max);
+
+        if (Cur != old)
+        {
+            onHealthChanged?.Invoke(this);
+        }
+    }
+
 
     private void Die()
     {
