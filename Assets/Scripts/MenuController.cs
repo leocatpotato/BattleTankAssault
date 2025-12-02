@@ -10,6 +10,9 @@ public class MenuController : MonoBehaviour
     [Header("UI")]
     public GameObject loadPanel;
 
+    [Header("How To Play")]
+    public GameObject howToPlayPanel;
+
     public Button btnLoadLevel1;
     public Button btnLoadLevel2;
     public Button btnLoadLevel3;
@@ -21,6 +24,9 @@ public class MenuController : MonoBehaviour
 
         if (loadPanel)
             loadPanel.SetActive(false);
+
+        if (howToPlayPanel)
+            howToPlayPanel.SetActive(false);
 
         if (mainButtonsGroup)
             mainButtonsGroup.SetActive(true);
@@ -46,6 +52,9 @@ public class MenuController : MonoBehaviour
         if (loadPanel)
             loadPanel.SetActive(true);
 
+        if (howToPlayPanel)
+            howToPlayPanel.SetActive(false);
+
         if (mainButtonsGroup)
             mainButtonsGroup.SetActive(false);
     }
@@ -55,9 +64,37 @@ public class MenuController : MonoBehaviour
         if (loadPanel)
             loadPanel.SetActive(false);
 
+        if (howToPlayPanel)
+            howToPlayPanel.SetActive(false);
+
         if (mainButtonsGroup)
             mainButtonsGroup.SetActive(true);
     }
+
+    public void OnOpenHowToPlay()
+    {
+        if (howToPlayPanel)
+            howToPlayPanel.SetActive(true);
+
+        if (loadPanel)
+            loadPanel.SetActive(false);
+
+        if (mainButtonsGroup)
+            mainButtonsGroup.SetActive(false);
+    }
+
+    public void OnCloseHowToPlay()
+    {
+        if (howToPlayPanel)
+            howToPlayPanel.SetActive(false);
+
+        if (loadPanel)
+            loadPanel.SetActive(false);
+
+        if (mainButtonsGroup)
+            mainButtonsGroup.SetActive(true);
+    }
+
 
     public void OnLoadLevel1()
     {
